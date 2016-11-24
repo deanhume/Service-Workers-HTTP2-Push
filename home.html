@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTTP2 Push Demo</title>
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- build:css result.min.css -->
+  <link rel="stylesheet" href="./css/material.min.css">
+</head>
+<body>
+  <h1>HTTP2 Server Push & Service Workers</h1>
+  <img src="./images/image.jpg" alt="snowboarder" />
+  <!-- Scripts -->
+  <script async src="./js/material.min.js"></script>
+  <script>
+  // Register the service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }).catch(function(err) {
+      // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  }
+</script>
+</body>
+</html>
