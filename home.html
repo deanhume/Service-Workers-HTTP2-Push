@@ -6,14 +6,26 @@
 </head>
 <body>
   <h1>HTTP2 Push</h1>
-  <img src="./images/beer-1.svg" width="200" height="200" />
-  <img src="./images/beer-2.svg" width="200" height="200" />
+  <img src="./images/beer-1.png" width="200" height="200" />
+  <img src="./images/beer-2.png" width="200" height="200" />
   <br>
   <br>
-  <img src="./images/beer-3.svg" width="200" height="200" />
-  <img src="./images/beer-4.svg" width="200" height="200" />
+  <img src="./images/beer-3.png" width="200" height="200" />
+  <img src="./images/beer-4.png" width="200" height="200" />
   <!-- Scripts -->
   <script async src="./js/promise.min.js"></script>
   <script async src="./js/fetch.js"></script>
+  <script>
+  // Register the service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  }
+  </script>
 </body>
 </html>

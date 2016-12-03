@@ -45,7 +45,6 @@ app.get('/push', (req, res) => {
             console.log(err);
           });
 
-         
           fetchJs.end(files[2]);
       }
 
