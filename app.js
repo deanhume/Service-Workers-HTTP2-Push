@@ -6,38 +6,47 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.get('/home', (req, res) => {
+app.get('/nopush', (req, res) => {
+    fs.readFile('home.html')
+      .then(file => {
+        res.writeHead(200);
+        res.end(file);
+      })
+      .catch(error => res.status(500).send(error.toString()));
+});
+
+app.get('/push', (req, res) => {
     Promise.all([
       fs.readFile('home.html'),
-      fs.readFile('public/js/squareRoot.js'),
-      fs.readFile('public/images/image.jpg'),
+      fs.readFile('public/js/promise.min.js'),
+      fs.readFile('public/js/fetch.js'),
     ]).then(files => {
 
       // Does the browser support push?
       if (res.push){
           // The JS file
-          var squareRootStream = res.push('/js/squareRoot.js', {
+          var promiseJs = res.push('/js/promise.min.js', {
               req: {'accept': '**/*'},
               res: {'content-type': 'application/javascript'}
           });
 
-          squareRootStream.on('error', err => {
+          promiseJs.on('error', err => {
             console.log(err);
           });
 
-          squareRootStream.end(files[1]);
+          promiseJs.end(files[1]);
 
-          // The Image
-          var imageStream = res.push('/images/image.jpg', {
+          var fetchJs = res.push('/js/fetch.js', {
               req: {'accept': '**/*'},
-              res: {'content-type': 'image/jpeg'}
+              res: {'content-type': 'application/javascript'}
           });
 
-          imageStream.on('error', err => {
+          fetchJs.on('error', err => {
             console.log(err);
           });
 
-          imageStream.end(files[2]);
+         
+          fetchJs.end(files[2]);
       }
 
       res.writeHead(200);
@@ -46,12 +55,12 @@ app.get('/home', (req, res) => {
 });
 
 spdy.createServer({
-        key: fs.readFileSync('./privatekey.key'),
-        cert: fs.readFileSync('./certificate.crt')
+        key: fs.readFileSync('./server.key'),
+        cert: fs.readFileSync('./server.crt')
     }, app)
-    .listen(8033, (err) => {
+    .listen(8022, (err) => {
         if (err) {
             throw new Error(err);
         }
-        console.log('Listening on port:  8033.');
+        console.log('Listening on port:  8022.');
     });
