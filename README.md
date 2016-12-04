@@ -7,7 +7,7 @@ In order to run the sample code:
 
 - You'll need Node.js installed
 - Next run npm install (or yarn)
-- Run the following command in your terminal: **node app.js**
+- Run the following command in your terminal: **$ node app.js**
 - Open your browser and navigate to https://localhost:8022/push
 - You're done!
 
