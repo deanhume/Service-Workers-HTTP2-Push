@@ -15,7 +15,7 @@ app.get('/nopush', (req, res) => {
       .catch(error => res.status(500).send(error.toString()));
 });
 
-app.get('/push', (req, res) => {
+app.get('/example', (req, res) => {
     Promise.all([
       fs.readFile('home.html'),
       fs.readFile('public/js/promise.min.js'),
